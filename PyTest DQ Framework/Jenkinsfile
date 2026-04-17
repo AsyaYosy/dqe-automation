@@ -31,6 +31,7 @@ pipeline {
                    . $VENV_DIR/bin/activate
                    mkdir -p $REPORT_DIR
                    pytest tests -m "parquet_data" \
+                     --db_type="postgres" \
                      --db_host="postgres" \
                      --db_port="5432" \
                      --db_name="mydatabase" \

@@ -1,7 +1,10 @@
 import pytest
 from src.connectors.postgres.postgres_connector import PostgresConnectorContextManager
+from src.connectors.mysql.mysql_connector import MySqlConnectorContextManager
+from src.connectors.oracle.oracle_connector import OracleConnectorContextManager
+
 from src.data_quality.data_quality_validation_library import DataQualityLibrary
-from src.connectors.file_system.parquet_reader import ParquetReader
+from src.connectors.file_system.file_reader import FileReader
 
 def pytest_addoption(parser):
     parser.addoption("--db_host", action="store", default="localhost", help="Database host")
@@ -23,27 +26,37 @@ def pytest_configure(config):
 
 @pytest.fixture(scope='session')
 def db_connection(request):
+    db_type = request.config.getoption("--db_type")
     db_host = request.config.getoption("--db_host")
     db_name = request.config.getoption("--db_name")
     db_port = request.config.getoption("--db_port")
     db_user = request.config.getoption("--db_user")
     db_password = request.config.getoption("--db_password")
 
+    connector_class = None
+
+    if db_type == "postgres":
+        connector_class = PostgresConnectorContextManager
+    elif db_type == "mysql":
+        connector_class = MySqlConnectorContextManager
+    elif db_type == "oracle":
+        connector_class = OracleConnectorContextManager
+
     try:
-        with PostgresConnectorContextManager(db_user=db_user, db_password=db_password, db_host=db_host,
-                                            db_name=db_name, db_port=db_port) as db_connector:
+        with connector_class(db_user=db_user, db_password=db_password, db_host=db_host,
+                            db_name=db_name, db_port=db_port) as db_connector:
             yield db_connector
     except Exception as e:
-        pytest.fail(f"Failed to initialize PostgresConnectorContextManager: {e}")
+        pytest.fail(f"Failed to initialize {connector_class.__name__}: {e}")
 
 
 @pytest.fixture(scope='session')
-def parquet_reader(request):
+def file_reader(request):
     try:
-        reader = ParquetReader()
+        reader = FileReader()
         yield reader
     except Exception as e:
-        pytest.fail(f"Failed to initialize ParquetReader: {e}")
+        pytest.fail(f"Failed to initialize FileReader: {e}")
     finally:
         del reader
 

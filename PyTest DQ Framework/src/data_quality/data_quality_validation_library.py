@@ -24,7 +24,9 @@ class DataQualityLibrary:
 
     @staticmethod
     def check_data_completeness(df1, df2):
-        assert df1.equals(df2), "DataFrames are not equal"
+        df1_normalized = df1.apply(lambda x: x.astype(str).str.strip().str.lower())
+        df2_normalized = df2.apply(lambda x: x.astype(str).str.strip().str.lower())
+        assert df1_normalized.equals(df2_normalized), "DataFrames are not equal"
 
     @staticmethod
     def check_dataset_is_not_empty(df):

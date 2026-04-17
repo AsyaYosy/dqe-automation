@@ -1,7 +1,7 @@
 """
-Description: Data Quality checks ...
-Requirement(s): TICKET-1234
-Author(s): Name Surname
+Description: Data Quality checks for patient_sum_treatment_cost_per_facility_type parquet file
+Requirement: TICKET-1234
+Author: Anastasiia Yosypchuk
 """
 
 import pytest

@@ -1,7 +1,7 @@
 """
-Description: Data Quality checks ...
-Requirement(s): TICKET-1234
-Author(s): Name Surname
+Description: Data Quality checks for facility_type_avg_time_spent_per_visit_date parquet file
+Requirement: TICKET-1233
+Author: Anastasiia Yosypchuk
 """
 
 import pytest
