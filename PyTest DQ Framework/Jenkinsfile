@@ -29,6 +29,7 @@ pipeline {
                sh '''
                      cd "PyTest DQ Framework"
                    . $VENV_DIR/bin/activate
+                   rm -rf $REPORT_DIR
                    mkdir -p $REPORT_DIR
                    pytest tests -m "parquet_data" \
                      --db_type="postgres" \
