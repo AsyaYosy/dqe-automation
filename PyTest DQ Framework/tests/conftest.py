@@ -7,6 +7,7 @@ from src.data_quality.data_quality_validation_library import DataQualityLibrary
 from src.connectors.file_system.file_reader import FileReader
 
 def pytest_addoption(parser):
+    parser.addoption("--db_type", action="store", default="postgres", help="Type of the database")
     parser.addoption("--db_host", action="store", default="localhost", help="Database host")
     parser.addoption("--db_name", action="store", default="my_database", help="Database name")
     parser.addoption("--db_port", action="store", default="5432", help="Database port")
