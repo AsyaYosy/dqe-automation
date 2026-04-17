@@ -26,9 +26,9 @@ def source_data(db_connection):
     return source_data
 
 @pytest.fixture(scope='module')
-def target_data(parquet_reader):
+def target_data(file_reader):
     target_path = r'/parquet_data/facility_name_min_time_spent_per_visit_date'
-    target_data = parquet_reader.read_parquet(target_path)
+    target_data = file_reader.read(target_path)
     target_data = target_data.drop(columns=["partition_date"])
     return target_data
 
