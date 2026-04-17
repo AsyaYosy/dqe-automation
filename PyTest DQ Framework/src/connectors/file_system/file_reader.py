@@ -12,10 +12,10 @@ class FileReader:
         path = Path(file_path)
         suffix = path.suffix.lower()
         if suffix == '.parquet' or suffix == '':
-            return self._read_parquet(file_path)
+            return self.read_parquet(file_path)
         elif suffix == '.csv':
-            return self._read_csv(file_path)
+            return self.read_csv(file_path)
         elif suffix == '.json':
-            return self._read_json(file_path)
+            return self.read_json(file_path)
         else:
             raise ValueError(f"Unsupported file format: {suffix}")
