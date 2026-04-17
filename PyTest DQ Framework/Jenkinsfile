@@ -25,6 +25,7 @@ pipeline {
        }
        stage('Run tests') {
            steps {
+            catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                sh '''
                      cd "PyTest DQ Framework"
                    . $VENV_DIR/bin/activate
@@ -38,6 +39,7 @@ pipeline {
                      --html=$REPORT_DIR/$REPORT_FILE \
                      --self-contained-html
                '''
+            }
            }
        }
        stage('Archive test report') {
