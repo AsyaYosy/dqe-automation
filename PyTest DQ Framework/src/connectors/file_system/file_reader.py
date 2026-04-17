@@ -19,3 +19,12 @@ class FileReader:
             return self.read_json(file_path)
         else:
             raise ValueError(f"Unsupported file format: {suffix}")
+    
+    def read_parquet(self, file_path):
+        return pd.read_parquet(file_path)
+    
+    def read_csv(self, file_path):
+        return pd.read_csv(file_path)
+    
+    def read_json(self, file_path):
+        return pd.read_json(file_path)
