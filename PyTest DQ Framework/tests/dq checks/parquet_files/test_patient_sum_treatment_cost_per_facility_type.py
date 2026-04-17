@@ -29,7 +29,7 @@ def source_data(db_connection):
 
 @pytest.fixture(scope='module')
 def target_data(parquet_reader):
-    target_path = r'/parquet_data/spatient_sum_treatment_cost_per_facility_type'
+    target_path = r'/parquet_data/patient_sum_treatment_cost_per_facility_type'
     target_data = parquet_reader.read_parquet(target_path)
     target_data = target_data.drop(columns=["facility_type_partition"])
     return target_data
