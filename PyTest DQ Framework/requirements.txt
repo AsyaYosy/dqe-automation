@@ -1,0 +1,7 @@
+pytest==8.4.0
+pytest-html==4.2.0
+pandas==2.3.3
+psycopg2==2.9.11
+pyarrow==23.0.0
+oracledb==1.4.1
+pymysql==1.1.0
