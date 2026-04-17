@@ -11,7 +11,7 @@ class FileReader:
     def read(self, file_path):
         path = Path(file_path)
         suffix = path.suffix.lower()
-        if suffix == '.parquet':
+        if suffix == '.parquet' or suffix == '':
             return self._read_parquet(file_path)
         elif suffix == '.csv':
             return self._read_csv(file_path)
